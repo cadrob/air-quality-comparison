@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 import SearchBar from "./SearchBar";
+import Card from "./Card";
+import * as api from "./api";
 
 class App extends Component {
+  state = {
+    cards: []
+  };
   render() {
     return (
       <div className="App">
@@ -12,11 +17,43 @@ class App extends Component {
             <p>Compare the air quality between cities in the UK.</p>
             <p>Select cities to compare using the search tool below.</p>
           </h1>
-          <SearchBar />
+          <SearchBar createCard={this.createCard} />
+          <div className="cards-container">
+            {this.state.cards.map((card, index) => (
+              <Card key={index} card={card} />
+            ))}
+          </div>
         </div>
       </div>
     );
   }
+  createCard = city => {
+    //concat a city on the existing array
+    const card = {
+      city,
+      lastUpdated: null,
+      country: null,
+      pm25: "N/A",
+      so2: "N/A",
+      o3: "N/A",
+      no2: "N/A"
+    };
+    api.getCityLatest(city).then(measurements => {
+      measurements.forEach((measurement, index) => {
+        if (index === 0) {
+          card.lastUpdated = measurement.date.utc;
+          card.location = measurement.location;
+          card.country = measurement.country;
+        }
+        if (card[measurement.parameter] === "N/A") {
+          card[measurement.parameter] = measurement.value;
+        }
+      });
+
+      const prevState = this.state;
+      this.setState({ cards: prevState.cards.concat(card) });
+    });
+  };
 }
 
 export default App;

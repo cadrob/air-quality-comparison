@@ -7,7 +7,7 @@ import * as api from "./api";
 class SearchBar extends Component {
   state = {
     searchTerm: "",
-    cities: ["Manchester", "Liverpool", "Hull", "Fort William"],
+    cities: [],
     filteredResults: []
   };
   render() {
@@ -24,7 +24,11 @@ class SearchBar extends Component {
         {this.state.searchTerm && (
           <ul>
             {this.state.filteredResults.map((city, index) => (
-              <li key={index} value={city} onClick={this.handleClick}>
+              <li
+                key={index}
+                value={city}
+                onClick={() => this.handleClick(city)}
+              >
                 {city}
               </li>
             ))}
@@ -41,25 +45,22 @@ class SearchBar extends Component {
       this.setState({ filteredResults, searchTerm: value });
     }
   };
-  handleClick = () => {
-    api.getCities();
+  handleClick = city => {
+    this.props.createCard(city);
   };
 
   filterSearch = word => {
     const { cities } = this.state;
-    const toMatch = word.toUpperCase();
-    const myRegEx = new RegExp(toMatch);
     const results = cities.reduce((acc, current) => {
       const { city } = current;
-      if (myRegEx.test(city.toUpperCase())) acc.push(city);
+      if (city.toUpperCase().includes(word.toUpperCase())) acc.push(city);
       return acc;
     }, []);
-    console.log(results);
     return results.sort();
   };
 
   componentDidMount() {
-    const cities = api.getCities().then(cities => this.setState({ cities }));
+    api.getCities().then(cities => this.setState({ cities }));
   }
 }
 

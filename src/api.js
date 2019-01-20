@@ -6,3 +6,11 @@ export const getCities = async () => {
   );
   return data.results;
 };
+
+export const getCityLatest = async city => {
+  const { data } = await axios.get(
+    `https://api.openaq.org/v1/measurements?city=${city}&order_by=date&limit=10000&sort=desc&parameter=pm25&parameter=so2&parameter=o3&parameter=no2&country=GB`
+  );
+
+  return data.results;
+};
