@@ -20,16 +20,29 @@ class App extends Component {
           <SearchBar createCard={this.createCard} />
           <div className="cards-container">
             {this.state.cards.map((card, index) => (
-              <Card key={index} card={card} />
+              <Card
+                key={index}
+                card={card}
+                id={index}
+                removeCard={this.removeCard}
+              />
             ))}
           </div>
         </div>
       </div>
     );
   }
-  createCard = city => {
-    //concat a city on the existing array
+
+  removeCard = id => {
+    const prevCards = this.state.cards;
+    const newCards = prevCards.filter((card, index) => {
+      return index !== id;
+    });
+    this.setState({ cards: newCards });
+  };
+  createCard = (city, id) => {
     const card = {
+      id,
       city,
       lastUpdated: null,
       country: null,

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import "./Card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +17,6 @@ class Card extends Component {
       no2,
       o3
     } = this.props.card;
-    console.log(this.props.card);
     return (
       <div className="Card">
         <h2>
@@ -28,18 +26,23 @@ class Card extends Component {
             .toUpperCase()}
         </h2>
         <h1>{location}</h1>
-        <h3>{/* in {city}, {CountryData.countries[country].name} */}</h3>
+        <h3>
+          {" "}
+          in {city} , {CountryData.countries[country].name}{" "}
+        </h3>
         <h4>
           Values:PM25: {pm25}, SO2: {so2}, O3: {o3}, NO2: {no2}
         </h4>
-        <button>
+        <button onClick={this.deleteCard}>
           <FontAwesomeIcon icon={faTimes} size="lg" />
         </button>
       </div>
     );
   }
-}
 
-Card.propTypes = {};
+  deleteCard = () => {
+    this.props.removeCard(this.props.id);
+  };
+}
 
 export default Card;
