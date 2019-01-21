@@ -1,4 +1,27 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Air Comparison app
+
+### About
+
+This is an Air Comparison app that uses the OpenAQ API. Users can search for citys in the UK and create 'cards' with the related details on. Cards can be compared and removed.
+
+### Prerequisites
+
+- Node.js
+- React.js
+- Moment.js
+
+Dependencies:
+
+```
+    react: ^16.7.0
+    react-dom: ^16.7.0
+    react-scripts: 2.1.3
+    moment: ^2.23.0
+    axios: ^0.18.0
+    country-data: 0.0.31
+    @fortawesome/fontawesome-svg-core: ^1.2.12
+    @fortawesome/free-solid-svg-icons: ^5.6.3
+    @fortawesome/react-fontawesome: ^0.1.4
 
 ## Available Scripts
 
@@ -66,3 +89,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
