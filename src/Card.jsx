@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Card.css";
+import "./css/Card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";

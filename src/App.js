@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import "./css/App.css";
 import SearchBar from "./SearchBar";
 import Card from "./Card";
 import * as api from "./api";
